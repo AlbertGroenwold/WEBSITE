@@ -1,0 +1,47 @@
+﻿@page "/teams"
+@using WEB.Shared
+@inject HttpClient Http
+
+<h1>Teams</h1>
+@if (teams == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Team Name</th>
+            <th>Team ID</th>
+            <th>Number of members</th>
+            <th>Is Admin</th>
+            <th>Is Developer</th>
+            <th>Is Tester</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var team in teams)
+        {
+        <tr>
+            <td>@team.teamName</td>
+            <td>@team.teamID</td>
+            <td></td>
+            <td>@team.teamAdmin</td>
+            <td>@team.teamDev</td>
+            <td>@team.teamTest</td>
+        </tr>
+        }
+    </tbody>
+</table>
+}
+
+@code {
+    private TeamShared[] teams;
+
+    protected override async Task OnInitializedAsync()
+    {
+        teams = await Http.GetFromJsonAsync<TeamShared[]>("Team");
+    }
+}
