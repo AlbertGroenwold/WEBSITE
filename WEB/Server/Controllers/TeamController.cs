@@ -45,5 +45,11 @@ namespace WEB.Server.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("string")]
+        public string GetString()
+        {
+            return "i found the name";
+        }
     }
 }

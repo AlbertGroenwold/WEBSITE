@@ -1,0 +1,21 @@
+﻿@page "/crudcreate"
+
+@using WEB.Shared;
+
+@inject HttpClient Http
+@inject Microsoft.AspNetCore.Components.NavigationManager Navigation
+
+<h1>Create Team</h1>
+
+@functions {
+    TeamCrud crud = new TeamCrud();
+   // protected async Task CreateCRUD()
+   // {
+   //     await Http.SendJsonAsync(HttpMethod.Post, "/api/TeamCRUD/Create", crud);
+   //     Navigation.NavigateTo("/crudread");
+   // }
+   // void cancel()
+   // {
+   //     Navigation.NavigateTo("/crudread");
+//}
+}

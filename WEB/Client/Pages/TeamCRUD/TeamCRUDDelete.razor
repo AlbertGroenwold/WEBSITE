@@ -1,0 +1,49 @@
+﻿@using WEB.Shared;
+@page "/cruddelete/{recipeId}"
+@inject HttpClient Http
+@inject Microsoft.AspNetCore.Components.NavigationManager Navigation
+
+<h2>Delete</h2>
+<h3>Are you sure you want to delete crud : @crud.name</h3>
+<br />
+<div class="col-md-4">
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <td>@crud.name</td>
+        </tr>
+        <tr>
+            <td>ID</td>
+            <td>@crud.id</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>@crud.email</td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <input type="submit" value="Delete" @onclick="@(async () => await Delete())" class="btn btn-primary" />
+        <input type="submit" value="Cancel" @onclick="@cancel" class="btn btn-warning" />
+    </div>
+</div>
+
+@functions {
+    [Parameter]
+    public string crudId { get; set; }
+
+    TeamCrud crud = new TeamCrud();
+
+    protected override async Task OnInitializedAsync()
+    {
+        crud = await Http.GetFromJsonAsync<TeamCrud>("/api/TeamCRUD/detail/" + Convert.ToInt32(crudId));
+    }
+    protected async Task Delete()
+    {
+        await Http.DeleteAsync("api/TeamCRUD/delete/" + Convert.ToInt32(crudId));
+        Navigation.NavigateTo("/crudread");
+    }
+    void cancel()
+    {
+        Navigation.NavigateTo("/crudread");
+    }
+}

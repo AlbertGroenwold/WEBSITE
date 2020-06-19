@@ -1,12 +1,12 @@
 {
   "FilesToCompress": [
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\ygFkpELtbRCNsqgfW8e0LUo-7PiU9QkjfUowjzq559U=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\EjfN5gNBt_FJG_V4Kgip2_y780yZU3lXThE522jIphI=.hash",
       "Source": "C:\\WEBSITE\\WEB\\Client\\obj\\Debug\\netstandard2.1\\blazor\\unlinked\\WEB.Client.dll",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/WEB.Client.dll.gz"
     },
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\99dseBOagY3mzu5Y8Eqm8gRI_o8QbbCp7R2Ew9bQ_5E=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\WkuXkEV--B1J2kYqjuSPxgHubOHALmA548PhKTed2JE=.hash",
       "Source": "C:\\WEBSITE\\WEB\\Client\\obj\\Debug\\netstandard2.1\\blazor\\unlinked\\System.Net.Http.Json.dll",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/System.Net.Http.Json.dll.gz"
     },
@@ -31,7 +31,7 @@
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/System.Memory.dll.gz"
     },
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\pzCorxTCjbUODF5JuRgcHc8gVYEdSaKD9NWA6wZhTPE=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\HQeN_ZfHAERO_uW0fP0J9J3WV1hQ3vUIOWbqGSYBPp8=.hash",
       "Source": "C:\\WEBSITE\\WEB\\Client\\obj\\Debug\\netstandard2.1\\blazor\\unlinked\\System.Text.Json.dll",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/System.Text.Json.dll.gz"
     },
@@ -151,7 +151,7 @@
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/System.Numerics.Vectors.dll.gz"
     },
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\hbEA2pdvgll2bWeJXCtehEV3kl3WFnBgQj6ttcesEA4=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\Tqh1Da_iTRQJEZUGAsMNFuZ4hf1PMf13WApRZod_uw4=.hash",
       "Source": "C:\\WEBSITE\\WEB\\Client\\obj\\Debug\\netstandard2.1\\blazor\\unlinked\\System.Text.Encodings.Web.dll",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/System.Text.Encodings.Web.dll.gz"
     },
@@ -191,7 +191,7 @@
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/Microsoft.Extensions.Logging.Abstractions.dll.gz"
     },
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\rE6hnmlGBgIKDtZ3XSITBnpnkG9K8dlYAWviVWLFXXg=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\TxbladNdpPFGBJrQYwGjhdsGe7QL_PA-QwzR6UbD6vA=.hash",
       "Source": "C:\\WEBSITE\\WEB\\Client\\obj\\Debug\\netstandard2.1\\blazor\\unlinked\\WEB.Shared.dll",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/WEB.Shared.dll.gz"
     },
@@ -266,12 +266,12 @@
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/Microsoft.JSInterop.WebAssembly.dll.gz"
     },
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\6GCr8F7yUhfLYQPSvMQe89qTejvvrbdmSwDj2n3JW_I=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\NW-DsO3X9rOV3Ss2PCqAY3trYjNPvPhvJ0Q8bQhqKZo=.hash",
       "Source": "C:\\WEBSITE\\WEB\\Client\\obj\\Debug\\netstandard2.1\\blazor\\unlinked\\WEB.Client.pdb",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/WEB.Client.pdb.gz"
     },
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\lNyokHyzywfn1QqVm717O74lf40e2NpQuQmYjAu7OBk=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\eyKJpWTzUUcjpvHbkP6hpp6a9gs_-TCymJKwg0uvqRY=.hash",
       "Source": "C:\\WEBSITE\\WEB\\Client\\obj\\Debug\\netstandard2.1\\blazor\\unlinked\\WEB.Shared.pdb",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/WEB.Shared.pdb.gz"
     },
@@ -296,7 +296,7 @@
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/blazor.webassembly.js.gz"
     },
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\T0F5u4TiH10sqxb7se8skX25tXEXxc7zYlPAgjZflEE=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\oM4ZNOEhtcwqkYVaYIcE2yyQjs99vlXKC0Rjinw7qUc=.hash",
       "Source": "C:\\WEBSITE\\WEB\\Client\\obj\\Debug\\netstandard2.1\\blazor\\blazor.boot.json",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/blazor.boot.json.gz"
     }
