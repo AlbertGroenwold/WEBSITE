@@ -48,12 +48,11 @@ namespace WEB.Server.Controllers
             int num  = 0;
             return Enumerable.Range(1, 2).Select(index => new TeamsModel
             {
-                teamName = "teamNameTest"+num,
-                teamID = "teamIDTest" + num,
-                teamAdmin = "teamAdminTest" + num,
-                teamDev = "teamDEVTest" + num,
-                teamAmount = num,
-                teamTest = "teamTestTest" + (num++),
+                TeamName = "teamNameTest"+num,
+                TeamID = "teamIDTest" + num,
+                Admin = num,
+                Developer = num,
+                Tester = (num++),
             })
             .ToArray();
         }

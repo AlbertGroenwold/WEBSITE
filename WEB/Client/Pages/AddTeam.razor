@@ -1,0 +1,55 @@
+﻿@using WEB.Shared
+@page "/addteam"
+@inject HttpClient Http
+@inject NavigationManager UriHelper
+
+<h1>Create</h1>
+
+<h3>Teams</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="ID" class="control-label">ID</label>
+                <input for="ID" class="form-control" @bind="@emp.TeamID" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class="form-control" @bind="@emp.TeamName">
+            </div>
+            <div class="form-group">
+                <label asp-for="Admin" class="control-label">Admin</label>
+                <input asp-for="Admin" class="form-control" @bind="@emp.Admin" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Devs" class="control-label">Devs</label>
+                <input asp-for="Devs" class="form-control" @bind="@emp.Developer" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Tester" class="control-label">Tester</label>
+                <input asp-for="Tester" class="form-control" @bind="@emp.Tester" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default" @onclick="@CreateTeam">Save</button>
+                <button class="btn" @onclick="@cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+@functions {
+
+    TeamsModel emp = new TeamsModel();
+
+    protected async Task CreateTeam()
+    {
+        await Http.PostAsJsonAsync("/api/Team/Create", emp);
+        UriHelper.NavigateTo("/fetchteam");
+    }
+
+    private void cancel()
+    {
+        UriHelper.NavigateTo("/fetchteam");
+    }
+}

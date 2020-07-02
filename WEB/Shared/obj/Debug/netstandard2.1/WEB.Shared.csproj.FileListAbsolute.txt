@@ -4,6 +4,6 @@ C:\WEBSITE\WEB\Shared\bin\Debug\netstandard2.1\WEB.Shared.pdb
 C:\WEBSITE\WEB\Shared\obj\Debug\netstandard2.1\WEB.Shared.csprojAssemblyReference.cache
 C:\WEBSITE\WEB\Shared\obj\Debug\netstandard2.1\WEB.Shared.AssemblyInfoInputs.cache
 C:\WEBSITE\WEB\Shared\obj\Debug\netstandard2.1\WEB.Shared.AssemblyInfo.cs
-C:\WEBSITE\WEB\Shared\obj\Debug\netstandard2.1\WEB.Shared.csproj.CoreCompileInputs.cache
 C:\WEBSITE\WEB\Shared\obj\Debug\netstandard2.1\WEB.Shared.dll
 C:\WEBSITE\WEB\Shared\obj\Debug\netstandard2.1\WEB.Shared.pdb
+C:\WEBSITE\WEB\Shared\obj\Debug\netstandard2.1\WEB.Shared.csproj.CoreCompileInputs.cache

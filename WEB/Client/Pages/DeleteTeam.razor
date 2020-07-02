@@ -1,0 +1,58 @@
+﻿@using WEB.Shared
+@page "/delete"
+@page "/delete/{empID}"
+@inject HttpClient Http
+@inject NavigationManager UriHelper
+
+<h2>Delete</h2>
+<h3>Are you sure you want to delete team with id : @EmpID</h3>
+
+<br /><div class="col-md-4">
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>@emp.TeamID</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>@emp.TeamName</td>
+        </tr>
+        <tr>
+            <td>Admin</td>
+            <td>@emp.Admin</td>
+        </tr>
+        <tr>
+            <td>Devs</td>
+            <td>@emp.Developer</td>
+        </tr>
+        <tr>
+            <td>Testers</td>
+            <td>@emp.Tester</td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <input type="submit" value="Delete" @onclick="@Delete" class="btn btn-default" />
+        <input type="submit" value="Cancel" @onclick="@cancel" class="btn" />
+    </div>
+</div>
+@functions
+{
+    [Parameter]
+    public string EmpID { get; set; }
+
+    TeamsModel emp = new TeamsModel();
+    protected override async Task OnInitializedAsync()
+    {
+        emp = await Http.GetFromJsonAsync<TeamsModel>($"/api/Team/Details/{EmpID}");
+    }
+    protected async Task Delete()
+    {
+        await Http.DeleteAsync($"api/Team/Delete/{EmpID}");
+        UriHelper.NavigateTo("/fetchteam");
+    }
+
+    private void cancel()
+    {
+        UriHelper.NavigateTo("/fetchteam");
+    }
+}

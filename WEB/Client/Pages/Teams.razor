@@ -31,7 +31,7 @@
                             @foreach (var item in teams)
                             {
                                 <tr>
-                                    <td>@item.teamName</td>
+                                    <td>@item.TeamName</td>
                                 </tr>
                             }
                         </tbody>
@@ -49,7 +49,7 @@
                     {
                         @foreach (var item in teams)
                         {
-                            <option value=@item.teamName>@item.teamName</option>
+                            <option value=@item.TeamName>@item.TeamName</option>
                         }
                     }
                 </select>
@@ -145,11 +145,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><input type="text" id="teamNameCreate" name="teamNameCreate" @bind="model.teamName" @bind:event="oninput"></td>
-                            <td><input type="text" id="teamIDCreate" name="teamIDCreate" @bind="model.teamID" @bind:event="oninput"></td>
-                            <td><input type="text" id="teamAdminCreate" name="teamAdminCreate" @bind="model.teamAdmin" @bind:event="oninput"></td>
-                            <td><input type="text" id="teamDevCreate" name="teamDevCreate" @bind="model.teamDev" @bind:event="oninput"></td>
-                            <td><input type="text" id="teamTestCreate" name="teamTestCreate" @bind="model.teamTest" @bind:event="oninput"></td>
+                            <td><input type="text" id="teamNameCreate" name="teamNameCreate" @bind="model.TeamName" @bind:event="oninput"></td>
+                            <td><input type="text" id="teamIDCreate" name="teamIDCreate" @bind="model.TeamID" @bind:event="oninput"></td>
+                            <td><input type="text" id="teamAdminCreate" name="teamAdminCreate" @bind="model.Admin" @bind:event="oninput"></td>
+                            <td><input type="text" id="teamDevCreate" name="teamDevCreate" @bind="model.Developer" @bind:event="oninput"></td>
+                            <td><input type="text" id="teamTestCreate" name="teamTestCreate" @bind="model.Tester" @bind:event="oninput"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -172,7 +172,7 @@
                     {
                         @foreach (var item in teams)
                         {
-                            <option value=@item.teamName>@item.teamName</option>
+                            <option value=@item.TeamName>@item.TeamName</option>
                         }
                     }
                 </select>
@@ -191,11 +191,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><input type="text" id="teamIDCreate" name="teamIDCreate" readonly @bind=@model.teamID @bind:event="oninput"></td>
-                            <td><input type="text" id="teamNameCreate" name="teamNameCreate" @bind=@model.teamName @bind:event="oninput"></td>
-                            <td><input type="text" id="teamAdminCreate" name="teamAdminCreate" @bind=@model.teamAdmin @bind:event="oninput"></td>
-                            <td><input type="text" id="teamDevCreate" name="teamDevCreate" @bind=@model.teamDev @bind:event="oninput"></td>
-                            <td><input type="text" id="teamTestCreate" name="teamTestCreate" @bind=@model.teamTest @bind:event="oninput"></td>
+                            <td><input type="text" id="teamIDCreate" name="teamIDCreate" readonly @bind=@model.TeamID @bind:event="oninput"></td>
+                            <td><input type="text" id="teamNameCreate" name="teamNameCreate" @bind=@model.TeamName @bind:event="oninput"></td>
+                            <td><input type="text" id="teamAdminCreate" name="teamAdminCreate" @bind=@model.Admin @bind:event="oninput"></td>
+                            <td><input type="text" id="teamDevCreate" name="teamDevCreate" @bind=@model.Developer @bind:event="oninput"></td>
+                            <td><input type="text" id="teamTestCreate" name="teamTestCreate" @bind=@model.Tester @bind:event="oninput"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -218,7 +218,7 @@
                     {
                         @foreach (var item in teams)
                         {
-                            <option value=@item.teamName>@item.teamName</option>
+                            <option value=@item.TeamName>@item.TeamName</option>
                         }
                     }
                 </select>
@@ -235,11 +235,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>@model.teamID</td>
-                            <td>@model.teamName</td>
-                            <td>@model.teamAdmin</td>
-                            <td>@model.teamDev</td>
-                            <td>@model.teamTest</td>
+                            <td>@model.TeamID</td>
+                            <td>@model.TeamName</td>
+                            <td>@model.Admin</td>
+                            <td>@model.Developer</td>
+                            <td>@model.Tester</td>
                         </tr>
                     </tbody>
                 </table>
@@ -250,13 +250,13 @@
     </div>
 
     @code {
-        TeamsModel model = new TeamsModel();
+        private TeamsModel model = new TeamsModel();
 
-        TeamsModel[] teams;
-        UsersModel[] users;
+        private TeamsModel[] teams;
+        private UsersModel[] users;
 
-        IList<string> usersInTeam;
-        IList<string> listOfTeams;
+        private IList<string> usersInTeam;
+        private IList<string> listOfTeams;
 
         private string selectedValue = "";
         private string selectValue2;
@@ -273,6 +273,21 @@
             users = await Http.GetFromJsonAsync<UsersModel[]>("User");
         }
 
+        private async Task CreateTeam()
+        {
+            await Http.PostAsJsonAsync<TeamsModel>("Team", model);
+        }
+
+        private async Task UpdateTeam()
+        {
+            await Http.PutAsJsonAsync<TeamsModel>("Team", model);
+        }
+
+        private async Task DeleteTeam()
+        {
+            await Http.DeleteAsync($"Team/{model.TeamID}");
+        }
+
         private void GetTeamModel(ChangeEventArgs e)
         {
 
@@ -282,26 +297,9 @@
             {
                 foreach(var team in teams)
                 {
-                    if (team.teamName.Equals(test)) model = team;
+                    if (team.TeamName.Equals(test)) model = team;
                 }
             }
-        }
-
-        private async Task CreateTeam()
-        {
-            await Http.PostAsJsonAsync<TeamsModel>("Team", model);
-        }
-
-        private async Task UpdateTeam()
-        {
-            await Http.PutAsJsonAsync<TeamsModel>("Team", model);
-            //await Http.PutAsJsonAsync<TeamsModel>($"Team/Update/{model.teamID}/{model.teamName}", model);
-        }
-
-        private async Task DeleteTeam()
-        {
-            //await Http.PostAsJsonAsync<TeamsModel>($"Team/{model.teamID}", model);
-            await Http.DeleteAsync($"Team/{model.teamID}");
         }
 
         private void ShowTeams()
@@ -317,29 +315,29 @@
 
                     if (selectValue2.Contains("name"))
                     {
-                        value = team.teamName.ToLower();
+                        value = team.TeamName.ToLower();
 
                     }
                     else if (selectValue2.Contains("admin"))
                     {
-                        value = team.teamAdmin.ToLower();
+                        value = team.Admin.ToString().ToLower();
                     }
                     else if (selectValue2.Contains("dev"))
                     {
-                        value = team.teamDev.ToLower();
+                        value = team.Developer.ToString().ToLower();
                     }
                     else if (selectValue2.Contains("tester"))
                     {
-                        value = team.teamTest.ToLower();
+                        value = team.Tester.ToString().ToLower();
                     }
 
                     if (selectedValue.Contains("Without"))
                     {
-                        if (!value.Contains(criteriaValue)) listOfTeams.Add(team.teamName);
+                        if (!value.Contains(criteriaValue)) listOfTeams.Add(team.TeamName);
                     }
                     else
                     {
-                        if (value.Contains(criteriaValue)) listOfTeams.Add(team.teamName);
+                        if (value.Contains(criteriaValue)) listOfTeams.Add(team.TeamName);
                     }
                 }
         }
@@ -355,7 +353,7 @@
 
             foreach (var team in teams)
             {
-                if (team.teamName.Equals(selectValue2)) teamID = team.teamID;
+                if (team.TeamName.Equals(selectValue2)) teamID = team.TeamID.ToString();
             }
 
             foreach (var user in users)

@@ -1,0 +1,63 @@
+﻿@using WEB.Shared
+@page "/editteam"
+@page "/editteam/{empID}"
+@inject HttpClient Http
+@inject NavigationManager UriHelper
+
+<h2>Edit</h2>
+
+<h4>Teams</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="ID" class="control-label">ID</label>
+                <input for="ID" class="form-control" @bind="@emp.TeamID" readonly/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class="form-control" @bind="@emp.TeamName">
+            </div>
+            <div class="form-group">
+                <label asp-for="Admin" class="control-label">Admin</label>
+                <input asp-for="Admin" class="form-control" @bind="@emp.Admin" />
+            </div>
+            <div class=" form-group">
+                <label asp-for="Devs" class="control-label">Devs</label>
+                <input asp-for="Devs" class="form-control" @bind="@emp.Developer" />
+            </div>
+            <div class=" form-group">
+                <label asp-for="Tester" class="control-label">Testers</label>
+                <input asp-for="Tester" class="form-control" @bind="@emp.Tester" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" @onclick="@UpdateTeam" class="btn btn-default" />
+                <input type="submit" value="Cancel" @onclick="@cancel" class="btn" />
+            </div>
+        </form>
+    </div>
+</div>
+@functions {
+    [Parameter]
+    public string EmpID { get; set; }
+
+    TeamsModel emp = new TeamsModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        emp = await Http.GetFromJsonAsync<TeamsModel>($"/api/Team/Details/{EmpID}");
+    }
+
+    protected async Task UpdateTeam()
+    {
+        await Http.PutAsJsonAsync<TeamsModel>("api/Team/Edit", emp);
+
+        UriHelper.NavigateTo("/fetchteam"); // doesnt seem to work
+    }
+    void cancel()
+    {
+        UriHelper.NavigateTo("/fetchteam");
+    }
+}

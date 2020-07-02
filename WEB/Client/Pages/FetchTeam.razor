@@ -1,0 +1,46 @@
+﻿@page "/fetchteam"
+@using WEB.Shared
+@inject HttpClient Http
+
+
+<h1>Team Data</h1>
+<p>This component demonstrates fetching Team data from the server.</p>
+<p>    <a href="/addteam">Create New</a></p>
+
+@if (empList == null)
+{
+    <p><em>Loading...</em></p>}
+else
+{
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in empList)
+            {
+                <tr>
+                    <td>@emp.TeamID</td>
+                    <td>@emp.TeamName</td>
+                    <td>
+                        <a href='/editteam/@emp.TeamID'>Edit</a>  |
+                        <a href='/delete/@emp.TeamID'>Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions
+{
+    TeamsModel[] empList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        empList = await Http.GetFromJsonAsync<TeamsModel[]>("/api/Team/Index");
+    }
+}
