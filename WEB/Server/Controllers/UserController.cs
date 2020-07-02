@@ -1,37 +1,44 @@
 ﻿using WEB.Shared;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
+using WEB.Server.src;
 
 namespace WEB.Server.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class UserController : ControllerBase
+    [Authorize]
+    public class UserController : Controller
     {
-
-        private readonly ILogger<UserController> logger;
-
-        public UserController(ILogger<UserController> logger)
-        {
-            this.logger = logger;
-        }
-
+        UserDataAccessLayer objuser = new UserDataAccessLayer();
         [HttpGet]
-        public IEnumerable<UsersModel> Get()
+        [Route("api/User/Index")]
+        public IEnumerable<UsersModel> Index()
         {
-            var rng = new Random();
-            int num = 0;
-            return Enumerable.Range(1, 6).Select(index => new UsersModel
-            {
-                userName = "userNameTest" + num,
-                userID = "userIDTest" + (num++),
-                userTeamID = "teamIDTest" + rng.Next(0,2),
-            })
-            .ToArray();
+            return objuser.GetAllUsers();
+        }
+        [HttpPost]
+        [Route("api/User/Create")]
+        public void Create([FromBody] UsersModel user)
+        {
+            if (ModelState.IsValid) objuser.AddUser(user);
+        }
+        [HttpGet]
+        [Route("api/User/Details/{id}")]
+        public UsersModel Details(string id)
+        {
+            return objuser.GetUserData(id);
+        }
+        [HttpPut]
+        [Route("api/User/Edit")]
+        public void Edit([FromBody] UsersModel user)
+        {
+            if (ModelState.IsValid) objuser.UpdateUser(user);
+        }
+        [HttpDelete]
+        [Route("api/User/Delete/{id}")]
+        public void Delete(string id)
+        {
+            objuser.DeleteUser(id);
         }
     }
 }

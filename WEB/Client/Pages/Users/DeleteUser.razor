@@ -1,0 +1,68 @@
+﻿@using WEB.Shared
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@page "/deleteuser"
+@page "/deleteuser/{empID}"
+@attribute [Authorize]
+@inject HttpClient Http
+@inject NavigationManager UriHelper
+
+<h2>Delete</h2>
+<h3>Are you sure you want to delete user with id : @EmpID</h3>
+
+<br /><div class="col-md-4">
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>@emp.UserID</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>@emp.UserName</td>
+        </tr>
+        <tr>
+            <td>TeamID</td>
+            <td>@emp.TeamID</td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <input type="submit" value="Delete" @onclick="@Delete" class="btn btn-default" />
+        <input type="submit" value="Cancel" @onclick="@cancel" class="btn" />
+    </div>
+</div>
+@functions
+{
+    [Parameter]
+    public string EmpID { get; set; }
+
+    UsersModel emp = new UsersModel();
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            emp = await Http.GetFromJsonAsync<UsersModel>($"/api/User/Details/{EmpID}");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+    protected async Task Delete()
+    {
+        try 
+        {
+            await Http.DeleteAsync($"api/User/Delete/{EmpID}");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+
+        UriHelper.NavigateTo("/fetchuser");
+    }
+
+    private void cancel()
+    {
+        UriHelper.NavigateTo("/fetchuser");
+    }
+}

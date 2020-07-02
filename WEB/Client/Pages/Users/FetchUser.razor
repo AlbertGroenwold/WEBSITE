@@ -1,0 +1,58 @@
+﻿@page "/fetchuser"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using WEB.Shared
+@attribute [Authorize]
+@inject HttpClient Http
+
+
+<h1>User Data</h1>
+<p>This component demonstrates fetching User data from the server.</p>
+<p>    <a href="/adduser">Create New</a></p>
+
+@if (empList == null)
+{
+    <p><em>Loading...</em></p>}
+else
+{
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>TeamID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in empList)
+            {
+            <tr>
+                <td>@emp.UserID</td>
+                <td>@emp.UserName</td>
+                <td>@emp.TeamID</td>
+                <td>
+                    <a href='/edituser/@emp.UserID'>Edit</a>  |
+                    <a href='/deleteuser/@emp.UserID'>Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions
+{
+    UsersModel[] empList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try 
+        { 
+            empList = await Http.GetFromJsonAsync<UsersModel[]>("/api/User/Index");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+}

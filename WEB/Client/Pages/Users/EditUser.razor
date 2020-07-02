@@ -1,0 +1,72 @@
+﻿@using WEB.Shared
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@page "/edituser"
+@page "/edituser/{empID}"
+@attribute [Authorize]
+@inject HttpClient Http
+@inject NavigationManager UriHelper
+
+<h2>Edit</h2>
+
+<h4>Users</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="ID" class="control-label">ID</label>
+                <input for="ID" class="form-control" @bind="@emp.UserID" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class="form-control" @bind="@emp.UserName">
+            </div>
+            <div class="form-group">
+                <label asp-for="Admin" class="control-label">TeamID</label>
+                <input asp-for="Admin" class="form-control" @bind="@emp.TeamID" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" @onclick="@UpdateUser" class="btn btn-default" />
+                <input type="submit" value="Cancel" @onclick="@cancel" class="btn" />
+            </div>
+        </form>
+    </div>
+</div>
+@functions {
+    [Parameter]
+    public string EmpID { get; set; }
+
+    UsersModel emp = new UsersModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try 
+        {
+            emp = await Http.GetFromJsonAsync<UsersModel>($"/api/User/Details/{EmpID}");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    protected async Task UpdateUser()
+    {
+        try 
+        {
+            await Http.PutAsJsonAsync<UsersModel>("api/User/Edit", emp);
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+
+        UriHelper.NavigateTo("/fetchuser"); // doesnt seem to work
+    }
+    void cancel()
+    {
+        UriHelper.NavigateTo("/fetchuser");
+    }
+}

@@ -2,6 +2,9 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.1": {
+      "jquery-qrcode/1.0.0": {
+        "type": "package"
+      },
       "Microsoft.AspNetCore.Authorization/3.1.3": {
         "type": "package",
         "dependencies": {
@@ -593,6 +596,23 @@
     }
   },
   "libraries": {
+    "jquery-qrcode/1.0.0": {
+      "sha512": "IhZFtN0GJbNOoJGkE9SehugS9l1dCkdoUqKLn1u2icqEsnrI3eDwMeEO7idxlGb3l03TYzdYXNZYh+2uNcNfyw==",
+      "type": "package",
+      "path": "jquery-qrcode/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/Scripts/jquery.qrcode.js",
+        "content/Scripts/jquery.qrcode.min.js",
+        "content/Scripts/jquery.qrcode.min.js.map",
+        "content/Scripts/qrcode.js",
+        "content/Scripts/qrcode.min.js",
+        "content/Scripts/qrcode.min.js.map",
+        "jquery-qrcode.1.0.0.nupkg.sha512",
+        "jquery-qrcode.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.Authorization/3.1.3": {
       "sha512": "ujHcZtQJcloThrt7NFQtUU9wqM1RsiItSQTz+W9yKyGrsWQyNnQY+lJvpUCVHzOqaQrxKRV4AHdUxtGquQPTcg==",
       "type": "package",
@@ -1828,7 +1848,8 @@
       "Microsoft.EntityFrameworkCore >= 3.1.5",
       "Microsoft.Extensions.Http >= 3.1.3",
       "System.Net.Http.Json >= 3.2.0",
-      "WEB.Shared >= 1.0.0"
+      "WEB.Shared >= 1.0.0",
+      "jquery-qrcode >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1901,6 +1922,10 @@
           "System.Net.Http.Json": {
             "target": "Package",
             "version": "[3.2.0, )"
+          },
+          "jquery-qrcode": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           }
         },
         "imports": [

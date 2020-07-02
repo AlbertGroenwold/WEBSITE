@@ -391,6 +391,7 @@
           "lib/netstandard2.0/IdentityServer4.Storage.dll": {}
         }
       },
+      "jquery-qrcode/1.0.0": {},
       "Microsoft.AspNetCore.ApiAuthorization.IdentityServer/3.1.3": {
         "dependencies": {
           "IdentityServer4": "3.0.0",
@@ -1867,7 +1868,8 @@
           "Microsoft.EntityFrameworkCore": "3.1.5",
           "Microsoft.Extensions.Http": "3.1.3",
           "System.Net.Http.Json": "3.2.0",
-          "WEB.Shared": "1.0.0"
+          "WEB.Shared": "1.0.0",
+          "jquery-qrcode": "1.0.0"
         },
         "runtime": {
           "WEB.Client.dll": {}
@@ -3390,6 +3392,13 @@
       "sha512": "sha512-hmUHGKiwrhy9o7Zz9gkEOPyZIM0mFgdR9vTWTjKgFdBvZ/24eOtpPNDtovNLIQz6kNnzaV2jgR3dANOIu+SxZg==",
       "path": "identityserver4.storage/3.0.0",
       "hashPath": "identityserver4.storage.3.0.0.nupkg.sha512"
+    },
+    "jquery-qrcode/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IhZFtN0GJbNOoJGkE9SehugS9l1dCkdoUqKLn1u2icqEsnrI3eDwMeEO7idxlGb3l03TYzdYXNZYh+2uNcNfyw==",
+      "path": "jquery-qrcode/1.0.0",
+      "hashPath": "jquery-qrcode.1.0.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.ApiAuthorization.IdentityServer/3.1.3": {
       "type": "package",

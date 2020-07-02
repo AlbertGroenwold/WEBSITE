@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "RPxPa9Zp0qwy+zq1L0RJCTEAwvsnvQtCdPbuZRtneJi9E7IalX5LnhmJ+ShYI/l/OD1qa+TtSv+kpDDAHFzEcA==",
+  "dgSpecHash": "f2v5wyzBv/3OduNWVflecWzo89aU0STsojiyApNRE+81esP5jURjSWWUDmtchT4pB2ot4DwKpNyM94olXYhAgw==",
   "success": true,
   "projectFilePath": "C:\\WEBSITE\\WEB\\Server\\WEB.Server.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\ajgro\\.nuget\\packages\\identityserver4.entityframework\\3.0.0\\identityserver4.entityframework.3.0.0.nupkg.sha512",
     "C:\\Users\\ajgro\\.nuget\\packages\\identityserver4.entityframework.storage\\3.0.0\\identityserver4.entityframework.storage.3.0.0.nupkg.sha512",
     "C:\\Users\\ajgro\\.nuget\\packages\\identityserver4.storage\\3.0.0\\identityserver4.storage.3.0.0.nupkg.sha512",
+    "C:\\Users\\ajgro\\.nuget\\packages\\jquery-qrcode\\1.0.0\\jquery-qrcode.1.0.0.nupkg.sha512",
     "C:\\Users\\ajgro\\.nuget\\packages\\microsoft.aspnetcore.apiauthorization.identityserver\\3.1.3\\microsoft.aspnetcore.apiauthorization.identityserver.3.1.3.nupkg.sha512",
     "C:\\Users\\ajgro\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.3\\microsoft.aspnetcore.authentication.jwtbearer.3.1.3.nupkg.sha512",
     "C:\\Users\\ajgro\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\3.0.0-preview9.19424.4\\microsoft.aspnetcore.authentication.openidconnect.3.0.0-preview9.19424.4.nupkg.sha512",

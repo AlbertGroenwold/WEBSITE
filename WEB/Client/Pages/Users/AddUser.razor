@@ -1,0 +1,57 @@
+﻿@using WEB.Shared
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@page "/adduser"
+@attribute [Authorize]
+@inject HttpClient Http
+@inject NavigationManager UriHelper
+
+<h1>Create</h1>
+
+<h3>Users</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="ID" class="control-label">ID</label>
+                <input for="ID" class="form-control" @bind="@emp.UserID" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class="form-control" @bind="@emp.UserName">
+            </div>
+            <div class="form-group">
+                <label asp-for="Admin" class="control-label">TeamID</label>
+                <input asp-for="Admin" class="form-control" @bind="@emp.TeamID" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default" @onclick="@CreateUser">Save</button>
+                <button class="btn" @onclick="@cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+@functions {
+
+    UsersModel emp = new UsersModel();
+
+    protected async Task CreateUser()
+    {
+        try
+        {
+            await Http.PostAsJsonAsync("/api/User/Create", emp);
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+        UriHelper.NavigateTo("/fetchuser");
+    }
+
+    private void cancel()
+    {
+        UriHelper.NavigateTo("/fetchuser");
+    }
+}

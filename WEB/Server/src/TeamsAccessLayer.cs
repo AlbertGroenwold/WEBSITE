@@ -5,11 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using WEB.Shared;
 
-namespace BlazorCrud.Server.DataAccess
+namespace WEB.Server.src
 {
     public class TeamDataAccessLayer
     {
-        TeamContext db = new TeamContext();
+        EntityContext db = new EntityContext();
+
         //To Get all teams details           
         public IEnumerable<TeamsModel> GetAllTeams()
         {
@@ -22,6 +23,7 @@ namespace BlazorCrud.Server.DataAccess
                 throw;
             }
         }
+
         //To Add new team record             
         public void AddTeam(TeamsModel team)
         {
@@ -35,6 +37,7 @@ namespace BlazorCrud.Server.DataAccess
                 throw;
             }
         }
+
         //To Update the records of a particluar team   
         public void UpdateTeam(TeamsModel team)
         {
@@ -47,7 +50,9 @@ namespace BlazorCrud.Server.DataAccess
             {
                 throw;
             }
-        }            //Get the details of a particular team    
+        }            
+        
+        //Get the details of a particular team    
         public TeamsModel GetTeamData(string id)
         {
             try
@@ -59,7 +64,9 @@ namespace BlazorCrud.Server.DataAccess
             {
                 throw;
             }
-        }            //To Delete the record of a particular team     
+        }            
+        
+        //To Delete the record of a particular team     
         public void DeleteTeam(string id)
         {
             try

@@ -71,6 +71,10 @@
             "System.Net.Http.Json": {
               "target": "Package",
               "version": "[3.2.0, )"
+            },
+            "jquery-qrcode": {
+              "target": "Package",
+              "version": "[1.0.0, )"
             }
           },
           "imports": [

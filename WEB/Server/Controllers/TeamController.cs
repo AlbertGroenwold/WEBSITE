@@ -1,60 +1,39 @@
-﻿using WEB.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using WEB.Server.src;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using WEB.Shared;
 
-namespace WEB.Server.Controllers
+namespace BlazorCrud.Server.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class TeamController : ControllerBase
+    [Authorize]
+    public class TeamController : Controller 
     {
-
-        private readonly ILogger<TeamController> logger;
-
-        public TeamController(ILogger<TeamController> logger)
-        {
-            this.logger = logger;
+        TeamDataAccessLayer objteam = new TeamDataAccessLayer();
+        [HttpGet] [Route("api/Team/Index")] 
+        public IEnumerable<TeamsModel> Index() 
+        { 
+            return objteam.GetAllTeams(); 
         }
-
-        [HttpPut]
-        public int Put([FromBody] TeamsModel response)
-        {
-            return 1;
+        [HttpPost] [Route("api/Team/Create")] 
+        public void Create([FromBody] TeamsModel team) 
+        { 
+            if (ModelState.IsValid) objteam.AddTeam(team); 
         }
-
-        [HttpPost]
-        public int Post([FromBody] TeamsModel response)
-        {
-
-            return 1;
+        [HttpGet] [Route("api/Team/Details/{id}")]
+        public TeamsModel Details(string id) 
+        { 
+            return objteam.GetTeamData(id); 
         }
-
-        [HttpDelete("{teamID}")]
-        public int Delete(string teamID)
-        {
-            
-
-            return 1;
+        [HttpPut] [Route("api/Team/Edit")] 
+        public void Edit([FromBody] TeamsModel team)
+        { 
+            if (ModelState.IsValid) objteam.UpdateTeam(team); 
         }
-
-        [HttpGet]
-        public IEnumerable<TeamsModel> Get()
-        {
-
-            int num  = 0;
-            return Enumerable.Range(1, 2).Select(index => new TeamsModel
-            {
-                TeamName = "teamNameTest"+num,
-                TeamID = "teamIDTest" + num,
-                Admin = num,
-                Developer = num,
-                Tester = (num++),
-            })
-            .ToArray();
+        [HttpDelete] [Route("api/Team/Delete/{id}")] 
+        public void Delete(string id) 
+        { 
+            objteam.DeleteTeam(id);
         }
-    }
+    } 
 }
