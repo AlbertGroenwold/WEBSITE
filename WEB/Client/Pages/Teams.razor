@@ -2,50 +2,396 @@
 @using WEB.Shared
 @inject HttpClient Http
 
-<h1>Teams</h1>
-@if (teams == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
+    <div>
+        <h3>Teams</h3>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Team Name</th>
-            <th>Team ID</th>
-            <th>Number of members</th>
-            <th>Is Admin</th>
-            <th>Is Developer</th>
-            <th>Is Tester</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var team in teams)
+        <div>
+            <label for="options">Choose a search criteria for your team:</label>
+
+            <select name="options" id="options" @bind="selectedValue">
+                <option value="empty"></option>
+                <option value="listTeams">List of all the teams</option>
+                <option value="listUsers">List of all the users in a team</option>
+                <option value="listWithTeams">List of teams that includes the following citeria</option>
+                <option value="listWithoutTeams">List of teams that doesn't include the following citeria</option>
+            </select>
+
+            @if (selectedValue.Equals("listTeams"))
+            {
+                @if (teams != null)
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>TeamName</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in teams)
+                            {
+                                <tr>
+                                    <td>@item.teamName</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+
+            @if (selectedValue.Equals("listUsers"))
+            {
+                <label for="teams">Please select a team:</label>
+
+                <select name="teams" id="teams" @onchange="Read">
+                    <option value=empty></option>
+                    @if (teams != null)
+                    {
+                        @foreach (var item in teams)
+                        {
+                            <option value=@item.teamName>@item.teamName</option>
+                        }
+                    }
+                </select>
+
+                @if (usersInTeam != null)
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>UserName</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (string item in usersInTeam)
+                            {
+                                <tr>
+                                    <td>@item</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+
+            @if (selectedValue.Contains("list") && selectedValue.Contains("Teams") && (selectedValue.Contains("With") || selectedValue.Contains("Without")))
+            {
+
+                <label for="teamsWith">With What Criteria:</label>
+
+                <select name="teamsWith" id="teamsWith" @bind="selectValue2">
+                    <option value="empty"></option>
+                    <option value="name">Team name contains</option>
+                    <option value="admin">Admin status</option>
+                    <option value="dev">Dev status</option>
+                    <option value="tester">Tester status</option>
+                    <option value="amount">Amount of members status</option>
+                    <option value="member">Contains a member</option>
+                </select>
+
+                <label for="citeriaWith">Criteria:</label>
+                <input type="text" id="citeriaWith" name="citeriaWith" @bind="criteriaValue" @bind:event="oninput">
+                <br>
+                <br>
+
+                <button class="btn btn-primary" @onclick="ShowTeams">Search</button>
+
+                @if (listOfTeams != null)
+                {
+                    @if (listOfTeams.Count > 0)
+                    {
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>TeamName</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (string item in listOfTeams)
+                                {
+                                    <tr>
+                                        <td>@item</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <label>0 Teams found</label>
+                    }
+                }
+
+            }
+        </div>
+
+
+        <div>
+            <button class="btn btn-primary" @onclick="ShowCreate">Create new team</button>
+
+            @if (showCreate != false)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Team Name</th>
+                            <th>Team ID</th>
+                            <th>Does this team have admin rights</th>
+                            <th>Will this team develop new code</th>
+                            <th>Will this team test new code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" id="teamNameCreate" name="teamNameCreate" @bind="model.teamName" @bind:event="oninput"></td>
+                            <td><input type="text" id="teamIDCreate" name="teamIDCreate" @bind="model.teamID" @bind:event="oninput"></td>
+                            <td><input type="text" id="teamAdminCreate" name="teamAdminCreate" @bind="model.teamAdmin" @bind:event="oninput"></td>
+                            <td><input type="text" id="teamDevCreate" name="teamDevCreate" @bind="model.teamDev" @bind:event="oninput"></td>
+                            <td><input type="text" id="teamTestCreate" name="teamTestCreate" @bind="model.teamTest" @bind:event="oninput"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button class="btn btn-primary" @onclick="CreateTeam">Create team!</button>
+
+            }
+        </div>
+
+        <div>
+            <button class="btn btn-primary" @onclick="ShowUpdate">Update existing team </button>
+
+            @if (showUpdate != false)
+            {
+                <label for="updateTeam">Please select a team:</label>
+
+                <select name="updateTeam" id="updateTeam" @onchange="GetTeamModel">
+                    <option value=empty></option>
+                    @if (teams != null)
+                    {
+                        @foreach (var item in teams)
+                        {
+                            <option value=@item.teamName>@item.teamName</option>
+                        }
+                    }
+                </select>
+
+                @if (model != null)
+                {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Team ID</th>
+                            <th>Team Name</th>
+                            <th>Does this team have admin rights</th>
+                            <th>Will this team develop new code</th>
+                            <th>Will this team test new code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" id="teamIDCreate" name="teamIDCreate" readonly @bind=@model.teamID @bind:event="oninput"></td>
+                            <td><input type="text" id="teamNameCreate" name="teamNameCreate" @bind=@model.teamName @bind:event="oninput"></td>
+                            <td><input type="text" id="teamAdminCreate" name="teamAdminCreate" @bind=@model.teamAdmin @bind:event="oninput"></td>
+                            <td><input type="text" id="teamDevCreate" name="teamDevCreate" @bind=@model.teamDev @bind:event="oninput"></td>
+                            <td><input type="text" id="teamTestCreate" name="teamTestCreate" @bind=@model.teamTest @bind:event="oninput"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button class="btn btn-primary" @onclick="UpdateTeam">Update team!</button>
+                }
+            }
+        </div>
+
+        <div>
+            <button class="btn btn-primary" @onclick="ShowDelete">Delete a team</button>
+
+            @if (showDelete != false)
+            {
+                <label for="deleteTeam">Please select a team:</label>
+
+                <select name="deleteTeam" id="deleteTeam"  @onchange="GetTeamModel">
+                    <option value=empty></option>
+                    @if (teams != null)
+                    {
+                        @foreach (var item in teams)
+                        {
+                            <option value=@item.teamName>@item.teamName</option>
+                        }
+                    }
+                </select>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Team ID</th>
+                            <th>Team Name</th>
+                            <th>Does this team have admin rights</th>
+                            <th>Will this team develop new code</th>
+                            <th>Will this team test new code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@model.teamID</td>
+                            <td>@model.teamName</td>
+                            <td>@model.teamAdmin</td>
+                            <td>@model.teamDev</td>
+                            <td>@model.teamTest</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button class="btn btn-primary" @onclick="DeleteTeam">Delete team!</button>
+            }
+        </div>
+    </div>
+
+    @code {
+        TeamsModel model = new TeamsModel();
+
+        TeamsModel[] teams;
+        UsersModel[] users;
+
+        IList<string> usersInTeam;
+        IList<string> listOfTeams;
+
+        private string selectedValue = "";
+        private string selectValue2;
+
+        private string criteriaValue;
+
+        private bool showCreate = false;
+        private bool showUpdate = false;
+        private bool showDelete = false;
+
+        protected override async Task OnInitializedAsync()
         {
-        <tr>
-            <td>@team.teamName</td>
-            <td>@team.teamID</td>
-            <td></td>
-            <td>@team.teamAdmin</td>
-            <td>@team.teamDev</td>
-            <td>@team.teamTest</td>
-        </tr>
+            teams = await Http.GetFromJsonAsync<TeamsModel[]>("Team");
+            users = await Http.GetFromJsonAsync<UsersModel[]>("User");
         }
-    </tbody>
-</table>
-}
 
-@code {
+        private void GetTeamModel(ChangeEventArgs e)
+        {
 
-    //services
-    //string queries
+            string test = e.Value.ToString();
 
-    private TeamShared[] teams;
+            if (teams!=null)
+            {
+                foreach(var team in teams)
+                {
+                    if (team.teamName.Equals(test)) model = team;
+                }
+            }
+        }
 
-    protected override async Task OnInitializedAsync()
-    {
-        teams = await Http.GetFromJsonAsync<TeamShared[]>("Team");
+        private async Task CreateTeam()
+        {
+            await Http.PostAsJsonAsync<TeamsModel>("Team", model);
+        }
+
+        private async Task UpdateTeam()
+        {
+            await Http.PutAsJsonAsync<TeamsModel>("Team", model);
+            //await Http.PutAsJsonAsync<TeamsModel>($"Team/Update/{model.teamID}/{model.teamName}", model);
+        }
+
+        private async Task DeleteTeam()
+        {
+            //await Http.PostAsJsonAsync<TeamsModel>($"Team/{model.teamID}", model);
+            await Http.DeleteAsync($"Team/{model.teamID}");
+        }
+
+        private void ShowTeams()
+        {
+            listOfTeams = new List<string>();
+
+            if (teams != null)
+                foreach (var team in teams)
+                {
+
+                    string value = "";
+                    criteriaValue = criteriaValue.ToLower();
+
+                    if (selectValue2.Contains("name"))
+                    {
+                        value = team.teamName.ToLower();
+
+                    }
+                    else if (selectValue2.Contains("admin"))
+                    {
+                        value = team.teamAdmin.ToLower();
+                    }
+                    else if (selectValue2.Contains("dev"))
+                    {
+                        value = team.teamDev.ToLower();
+                    }
+                    else if (selectValue2.Contains("tester"))
+                    {
+                        value = team.teamTest.ToLower();
+                    }
+
+                    if (selectedValue.Contains("Without"))
+                    {
+                        if (!value.Contains(criteriaValue)) listOfTeams.Add(team.teamName);
+                    }
+                    else
+                    {
+                        if (value.Contains(criteriaValue)) listOfTeams.Add(team.teamName);
+                    }
+                }
+        }
+
+
+        private void Read(ChangeEventArgs e)
+        {
+
+            selectValue2 = e.Value.ToString();
+
+            string teamID = "";
+            usersInTeam = new List<string>();
+
+            foreach (var team in teams)
+            {
+                if (team.teamName.Equals(selectValue2)) teamID = team.teamID;
+            }
+
+            foreach (var user in users)
+            {
+                if (user.userTeamID.Equals(teamID)) usersInTeam.Add(user.userName);
+            }
+
+        }
+
+        private void ShowCreate()
+        {
+            model = new TeamsModel();
+
+            showCreate = true;
+            showUpdate = false;
+            showDelete = false;
+
+        }
+
+        private void ShowUpdate()
+        {
+            model = new TeamsModel();
+
+            showCreate = false;
+            showUpdate = true;
+            showDelete = false;
+        }
+
+        private void ShowDelete()
+        {
+            model = new TeamsModel();
+
+            showCreate = false;
+            showUpdate = false;
+            showDelete = true;
+        }
+
+
     }
-}

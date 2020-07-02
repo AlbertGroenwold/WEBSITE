@@ -42,10 +42,6 @@
       "frameworks": {
         "netstandard2.1": {
           "dependencies": {
-            "Microsoft.AspNet.WebApi.Client": {
-              "target": "Package",
-              "version": "[5.2.7, )"
-            },
             "Microsoft.AspNetCore.Components.WebAssembly": {
               "target": "Package",
               "version": "[3.2.0, )"
@@ -60,13 +56,9 @@
               "target": "Package",
               "version": "[3.2.0, )"
             },
-            "NuGet.Packaging": {
-              "target": "Package",
-              "version": "[5.6.0, )"
-            },
             "System.Net.Http.Json": {
               "target": "Package",
-              "version": "[3.2.1, )"
+              "version": "[3.2.0, )"
             }
           },
           "imports": [
@@ -129,21 +121,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "Microsoft.AspNet.WebApi.Client": {
-              "target": "Package",
-              "version": "[5.2.7, )"
-            },
             "Microsoft.AspNetCore.Components.WebAssembly.Server": {
               "target": "Package",
               "version": "[3.2.0, )"
-            },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
-              "target": "Package",
-              "version": "[3.1.4, )"
-            },
-            "NuGet.Packaging": {
-              "target": "Package",
-              "version": "[5.6.0, )"
             }
           },
           "imports": [
@@ -207,20 +187,6 @@
       },
       "frameworks": {
         "netstandard2.1": {
-          "dependencies": {
-            "Microsoft.AspNet.WebApi.Client": {
-              "target": "Package",
-              "version": "[5.2.7, )"
-            },
-            "NuGet.Packaging": {
-              "target": "Package",
-              "version": "[5.6.0, )"
-            },
-            "System.Data.SqlClient": {
-              "target": "Package",
-              "version": "[4.8.1, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",

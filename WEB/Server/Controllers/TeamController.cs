@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using WEB.Shared;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using WEB.Server.src;
-using WEB.Server.Utilities;
-using WEB.Shared;
 
 namespace WEB.Server.Controllers
 {
@@ -14,6 +12,7 @@ namespace WEB.Server.Controllers
     [Route("[controller]")]
     public class TeamController : ControllerBase
     {
+
         private readonly ILogger<TeamController> logger;
 
         public TeamController(ILogger<TeamController> logger)
@@ -21,35 +20,42 @@ namespace WEB.Server.Controllers
             this.logger = logger;
         }
 
-        private string getData(DataTable table, int iteration, string col)
+        [HttpPut]
+        public int Put([FromBody] TeamsModel response)
         {
-            return table.Rows[iteration-1][col].ToString();
+            return 1;
+        }
+
+        [HttpPost]
+        public int Post([FromBody] TeamsModel response)
+        {
+
+            return 1;
+        }
+
+        [HttpDelete("{teamID}")]
+        public int Delete(string teamID)
+        {
+            
+
+            return 1;
         }
 
         [HttpGet]
-        public IEnumerable<TeamShared> Get()
+        public IEnumerable<TeamsModel> Get()
         {
-            DataManager dm = new DataManager();
 
-            DataTable table = dm.getDBTables("Teams");
-
-            int numOfTeams = table.Rows.Count;
-
-            return Enumerable.Range(1, numOfTeams).Select(index => new TeamShared
+            int num  = 0;
+            return Enumerable.Range(1, 2).Select(index => new TeamsModel
             {
-                teamID = getData(table,index,"TeamID"),
-                teamName = getData(table, index, "TeamName"),
-                teamAdmin = getData(table, index, "Admin").Equals("1") ? "True" : "False",
-                teamDev = getData(table, index, "Developer").Equals("1") ? "True" : "False",
-                teamTest = getData(table, index, "Tester").Equals("1") ? "True" : "False"
+                teamName = "teamNameTest"+num,
+                teamID = "teamIDTest" + num,
+                teamAdmin = "teamAdminTest" + num,
+                teamDev = "teamDEVTest" + num,
+                teamAmount = num,
+                teamTest = "teamTestTest" + (num++),
             })
             .ToArray();
-        }
-
-        [HttpGet("string")]
-        public string GetString()
-        {
-            return "i found the name";
         }
     }
 }
