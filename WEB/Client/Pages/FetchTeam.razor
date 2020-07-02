@@ -1,5 +1,8 @@
 ﻿@page "/fetchteam"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using WEB.Shared
+@attribute [Authorize]
 @inject HttpClient Http
 
 
@@ -41,6 +44,13 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        empList = await Http.GetFromJsonAsync<TeamsModel[]>("/api/Team/Index");
+        try 
+        { 
+            empList = await Http.GetFromJsonAsync<TeamsModel[]>("/api/Team/Index");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
     }
 }

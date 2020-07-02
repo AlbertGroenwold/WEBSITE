@@ -1,6 +1,9 @@
 ﻿@using WEB.Shared
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @page "/delete"
 @page "/delete/{empID}"
+@attribute [Authorize]
 @inject HttpClient Http
 @inject NavigationManager UriHelper
 
@@ -43,11 +46,26 @@
     TeamsModel emp = new TeamsModel();
     protected override async Task OnInitializedAsync()
     {
-        emp = await Http.GetFromJsonAsync<TeamsModel>($"/api/Team/Details/{EmpID}");
+        try
+        {
+            emp = await Http.GetFromJsonAsync<TeamsModel>($"/api/Team/Details/{EmpID}");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
     }
     protected async Task Delete()
     {
-        await Http.DeleteAsync($"api/Team/Delete/{EmpID}");
+        try 
+        {
+            await Http.DeleteAsync($"api/Team/Delete/{EmpID}");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+
         UriHelper.NavigateTo("/fetchteam");
     }
 

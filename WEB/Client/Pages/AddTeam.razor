@@ -1,5 +1,8 @@
 ﻿@using WEB.Shared
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @page "/addteam"
+@attribute [Authorize]
 @inject HttpClient Http
 @inject NavigationManager UriHelper
 
@@ -44,7 +47,14 @@
 
     protected async Task CreateTeam()
     {
-        await Http.PostAsJsonAsync("/api/Team/Create", emp);
+        try
+        {
+            await Http.PostAsJsonAsync("/api/Team/Create", emp);
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
         UriHelper.NavigateTo("/fetchteam");
     }
 

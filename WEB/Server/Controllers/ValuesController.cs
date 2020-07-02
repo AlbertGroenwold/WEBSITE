@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlazorCrud.Server.DataAccess;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WEB.Shared;
 
-namespace BlazorCrud.Server.Controllers 
-{ 
+namespace BlazorCrud.Server.Controllers
+{
+    [Authorize]
     public class TeamController : Controller 
     {
         TeamDataAccessLayer objteam = new TeamDataAccessLayer();

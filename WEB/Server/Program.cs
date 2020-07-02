@@ -13,7 +13,6 @@ namespace WEB.Server
     {
         public static void Main(string[] args)
         {
-
             CreateHostBuilder(args).Build().Run();
         }
 
