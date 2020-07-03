@@ -1,36 +1,35 @@
 ﻿@using WEB.Shared
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@page "/delete"
-@page "/delete/{empID}"
+@page "/delete/{teamID}"
 @attribute [Authorize]
 @inject HttpClient Http
 @inject NavigationManager UriHelper
 
 <h2>Delete</h2>
-<h3>Are you sure you want to delete team with id : @EmpID</h3>
+<h3>Are you sure you want to delete team with id : @TeamID</h3>
 
 <br /><div class="col-md-4">
     <table class="table">
         <tr>
             <td>ID</td>
-            <td>@emp.TeamID</td>
+            <td>@team.TeamID</td>
         </tr>
         <tr>
             <td>Name</td>
-            <td>@emp.TeamName</td>
+            <td>@team.TeamName</td>
         </tr>
         <tr>
             <td>Admin</td>
-            <td>@emp.Admin</td>
+            <td>@team.Admin</td>
         </tr>
         <tr>
             <td>Devs</td>
-            <td>@emp.Developer</td>
+            <td>@team.Developer</td>
         </tr>
         <tr>
             <td>Testers</td>
-            <td>@emp.Tester</td>
+            <td>@team.Tester</td>
         </tr>
     </table>
     <div class="form-group">
@@ -41,14 +40,14 @@
 @functions
 {
     [Parameter]
-    public string EmpID { get; set; }
+    public string TeamID { get; set; }
 
-    TeamsModel emp = new TeamsModel();
+    TeamsModel team = new TeamsModel();
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            emp = await Http.GetFromJsonAsync<TeamsModel>($"/api/Team/Details/{EmpID}");
+            team = await Http.GetFromJsonAsync<TeamsModel>($"/api/Team/Details/{TeamID}");
         }
         catch (AccessTokenNotAvailableException exception)
         {
@@ -57,9 +56,9 @@
     }
     protected async Task Delete()
     {
-        try 
+        try
         {
-            await Http.DeleteAsync($"api/Team/Delete/{EmpID}");
+            await Http.DeleteAsync($"api/Team/Delete/{TeamID}");
         }
         catch (AccessTokenNotAvailableException exception)
         {

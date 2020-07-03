@@ -8,9 +8,9 @@
 
 <h1>User Data</h1>
 <p>This component demonstrates fetching User data from the server.</p>
-<p>    <a href="/adduser">Create New</a></p>
+<p>    <a href="/adduser">Create New</a>     </p>
 
-@if (empList == null)
+@if (userList == null)
 {
     <p><em>Loading...</em></p>}
 else
@@ -24,15 +24,15 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var emp in empList)
+            @foreach (var user in userList)
             {
             <tr>
-                <td>@emp.UserID</td>
-                <td>@emp.UserName</td>
-                <td>@emp.TeamID</td>
+                <td>@user.UserID</td>
+                <td>@user.UserName</td>
+                <td>@user.TeamID</td>
                 <td>
-                    <a href='/edituser/@emp.UserID'>Edit</a>  |
-                    <a href='/deleteuser/@emp.UserID'>Delete</a>
+                    <a href='/edituser/@user.UserID'>Edit</a>  |
+                    <a href='/deleteuser/@user.UserID'>Delete</a>
                 </td>
             </tr>
             }
@@ -42,17 +42,24 @@ else
 
 @functions
 {
-    UsersModel[] empList;
+    UsersModel[] userList;
+
+    [CascadingParameter] Task<AuthenticationState> authenticationStateTask { get; set; } //differenece between this
 
     protected override async Task OnInitializedAsync()
     {
-        try 
-        { 
-            empList = await Http.GetFromJsonAsync<UsersModel[]>("/api/User/Index");
-        }
-        catch (AccessTokenNotAvailableException exception)
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+        if (user.Identity.IsAuthenticated)
         {
-            exception.Redirect();
+            try
+            {
+                userList = await Http.GetFromJsonAsync<UsersModel[]>("/api/User/Index");
+            }
+            catch (AccessTokenNotAvailableException exception) //and this
+            {
+                exception.Redirect();
+            }
         }
     }
 }

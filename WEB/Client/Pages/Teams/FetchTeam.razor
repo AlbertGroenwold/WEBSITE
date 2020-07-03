@@ -10,7 +10,7 @@
 <p>This component demonstrates fetching Team data from the server.</p>
 <p>    <a href="/addteam">Create New</a></p>
 
-@if (empList == null)
+@if (teamList == null)
 {
     <p><em>Loading...</em></p>}
 else
@@ -23,14 +23,14 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var emp in empList)
+            @foreach (var team in teamList)
             {
                 <tr>
-                    <td>@emp.TeamID</td>
-                    <td>@emp.TeamName</td>
+                    <td>@team.TeamID</td>
+                    <td>@team.TeamName</td>
                     <td>
-                        <a href='/editteam/@emp.TeamID'>Edit</a>  |
-                        <a href='/delete/@emp.TeamID'>Delete</a>
+                        <a href='/editteam/@team.TeamID'>Edit</a>  |
+                        <a href='/delete/@team.TeamID'>Delete</a>
                     </td>
                 </tr>
             }
@@ -40,13 +40,13 @@ else
 
 @functions
 {
-    TeamsModel[] empList;
+    TeamsModel[] teamList;
 
     protected override async Task OnInitializedAsync()
     {
-        try 
-        { 
-            empList = await Http.GetFromJsonAsync<TeamsModel[]>("/api/Team/Index");
+        try
+        {
+            teamList = await Http.GetFromJsonAsync<TeamsModel[]>("/api/Team/Index");
         }
         catch (AccessTokenNotAvailableException exception)
         {

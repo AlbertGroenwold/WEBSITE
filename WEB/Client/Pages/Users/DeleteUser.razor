@@ -1,28 +1,27 @@
 ﻿@using WEB.Shared
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@page "/deleteuser"
-@page "/deleteuser/{empID}"
+@page "/deleteuser/{userID}"
 @attribute [Authorize]
 @inject HttpClient Http
 @inject NavigationManager UriHelper
 
 <h2>Delete</h2>
-<h3>Are you sure you want to delete user with id : @EmpID</h3>
+<h3>Are you sure you want to delete user with id : @UserID</h3>
 
 <br /><div class="col-md-4">
     <table class="table">
         <tr>
             <td>ID</td>
-            <td>@emp.UserID</td>
+            <td>@user.UserID</td>
         </tr>
         <tr>
             <td>Name</td>
-            <td>@emp.UserName</td>
+            <td>@user.UserName</td>
         </tr>
         <tr>
             <td>TeamID</td>
-            <td>@emp.TeamID</td>
+            <td>@user.TeamID</td>
         </tr>
     </table>
     <div class="form-group">
@@ -33,14 +32,14 @@
 @functions
 {
     [Parameter]
-    public string EmpID { get; set; }
+    public string UserID { get; set; }
 
-    UsersModel emp = new UsersModel();
+    UsersModel user = new UsersModel();
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            emp = await Http.GetFromJsonAsync<UsersModel>($"/api/User/Details/{EmpID}");
+            user = await Http.GetFromJsonAsync<UsersModel>($"/api/User/Details/{UserID}");
         }
         catch (AccessTokenNotAvailableException exception)
         {
@@ -49,9 +48,9 @@
     }
     protected async Task Delete()
     {
-        try 
+        try
         {
-            await Http.DeleteAsync($"api/User/Delete/{EmpID}");
+            await Http.DeleteAsync($"api/User/Delete/{UserID}");
         }
         catch (AccessTokenNotAvailableException exception)
         {

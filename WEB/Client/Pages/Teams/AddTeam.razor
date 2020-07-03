@@ -16,23 +16,23 @@
         <form>
             <div class="form-group">
                 <label for="ID" class="control-label">ID</label>
-                <input for="ID" class="form-control" @bind="@emp.TeamID" />
+                <input for="ID" class="form-control" @bind="@team.TeamID" />
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Name</label>
-                <input asp-for="Name" class="form-control" @bind="@emp.TeamName">
+                <input asp-for="Name" class="form-control" @bind="@team.TeamName">
             </div>
             <div class="form-group">
                 <label asp-for="Admin" class="control-label">Admin</label>
-                <input asp-for="Admin" class="form-control" @bind="@emp.Admin" />
+                <input asp-for="Admin" class="form-control" @bind="@team.Admin" />
             </div>
             <div class="form-group">
                 <label asp-for="Devs" class="control-label">Devs</label>
-                <input asp-for="Devs" class="form-control" @bind="@emp.Developer" />
+                <input asp-for="Devs" class="form-control" @bind="@team.Developer" />
             </div>
             <div class="form-group">
                 <label asp-for="Tester" class="control-label">Tester</label>
-                <input asp-for="Tester" class="form-control" @bind="@emp.Tester" />
+                <input asp-for="Tester" class="form-control" @bind="@team.Tester" />
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-default" @onclick="@CreateTeam">Save</button>
@@ -43,13 +43,13 @@
 </div>
 @functions {
 
-    TeamsModel emp = new TeamsModel();
+    TeamsModel team = new TeamsModel();
 
     protected async Task CreateTeam()
     {
         try
         {
-            await Http.PostAsJsonAsync("/api/Team/Create", emp);
+            await Http.PostAsJsonAsync("/api/Team/Create", team);
         }
         catch (AccessTokenNotAvailableException exception)
         {

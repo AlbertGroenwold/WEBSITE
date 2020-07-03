@@ -1,8 +1,7 @@
 ﻿@using WEB.Shared
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@page "/edituser"
-@page "/edituser/{empID}"
+@page "/edituser/{userID}"
 @attribute [Authorize]
 @inject HttpClient Http
 @inject NavigationManager UriHelper
@@ -17,15 +16,15 @@
         <form>
             <div class="form-group">
                 <label for="ID" class="control-label">ID</label>
-                <input for="ID" class="form-control" @bind="@emp.UserID" readonly />
+                <input for="ID" class="form-control" @bind="@user.UserID" readonly />
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Name</label>
-                <input asp-for="Name" class="form-control" @bind="@emp.UserName">
+                <input asp-for="Name" class="form-control" @bind="@user.UserName">
             </div>
             <div class="form-group">
                 <label asp-for="Admin" class="control-label">TeamID</label>
-                <input asp-for="Admin" class="form-control" @bind="@emp.TeamID" />
+                <input asp-for="Admin" class="form-control" @bind="@user.TeamID" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" @onclick="@UpdateUser" class="btn btn-default" />
@@ -36,15 +35,15 @@
 </div>
 @functions {
     [Parameter]
-    public string EmpID { get; set; }
+    public string UserID { get; set; }
 
-    UsersModel emp = new UsersModel();
+    UsersModel user = new UsersModel();
 
     protected override async Task OnInitializedAsync()
     {
-        try 
+        try
         {
-            emp = await Http.GetFromJsonAsync<UsersModel>($"/api/User/Details/{EmpID}");
+            user = await Http.GetFromJsonAsync<UsersModel>($"/api/User/Details/{UserID}");
         }
         catch (AccessTokenNotAvailableException exception)
         {
@@ -54,9 +53,9 @@
 
     protected async Task UpdateUser()
     {
-        try 
+        try
         {
-            await Http.PutAsJsonAsync<UsersModel>("api/User/Edit", emp);
+            await Http.PutAsJsonAsync<UsersModel>("api/User/Edit", user);
         }
         catch (AccessTokenNotAvailableException exception)
         {

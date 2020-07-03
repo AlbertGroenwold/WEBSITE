@@ -41,6 +41,10 @@ obj\Debug\netstandard2.1\blazor\unlinked\Microsoft.AspNetCore.Metadata.dll
 obj\Debug\netstandard2.1\blazor\unlinked\WEB.Shared.dll
 obj\Debug\netstandard2.1\blazor\unlinked\System.ComponentModel.Annotations.dll
 obj\Debug\netstandard2.1\blazor\unlinked\System.ComponentModel.DataAnnotations.dll
+obj\Debug\netstandard2.1\blazor\unlinked\Microsoft.Extensions.Identity.Stores.dll
+obj\Debug\netstandard2.1\blazor\unlinked\Microsoft.Extensions.Identity.Core.dll
+obj\Debug\netstandard2.1\blazor\unlinked\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+obj\Debug\netstandard2.1\blazor\unlinked\Microsoft.AspNetCore.Cryptography.Internal.dll
 obj\Debug\netstandard2.1\blazor\unlinked\Microsoft.AspNetCore.Components.Web.dll
 obj\Debug\netstandard2.1\blazor\unlinked\Microsoft.AspNetCore.Components.Forms.dll
 obj\Debug\netstandard2.1\blazor\unlinked\Microsoft.AspNetCore.Components.dll
