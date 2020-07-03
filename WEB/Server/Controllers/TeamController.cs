@@ -9,7 +9,7 @@ namespace BlazorCrud.Server.Controllers
     [Authorize]
     public class TeamController : Controller 
     {
-        TeamDataAccessLayer objteam = new TeamDataAccessLayer();
+        TeamDataAccessLayer objteam = new TeamDataAccessLayer();//dependecy injection
         [HttpGet] [Route("api/Team/Index")] 
         public IEnumerable<TeamsModel> Index() 
         { 

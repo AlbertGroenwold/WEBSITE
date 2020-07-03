@@ -1,7 +1,7 @@
 {
   "FilesToCompress": [
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\rHp0kudQ4GY2A7BkxnfKHRukib8eBm--pKXnf2NQvsQ=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\52To0xMMcUAC0AAiwD6WIb4ixrsGgT_Ac2U6de_FxO8=.hash",
       "Source": "C:\\WEBSITE\\WEB\\Client\\obj\\Debug\\netstandard2.1\\blazor\\unlinked\\WEB.Client.dll",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/WEB.Client.dll.gz"
     },
@@ -311,7 +311,7 @@
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/Microsoft.JSInterop.WebAssembly.dll.gz"
     },
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\_T2SGdwjPTXJiPIFNLnTfuy7c3yWHIIrfoCXyqF1Caw=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\7Xa6uXDpr_JPemx3V5vKUt2VIE9EwZtsDFrPm_BiEQc=.hash",
       "Source": "C:\\WEBSITE\\WEB\\Client\\obj\\Debug\\netstandard2.1\\blazor\\unlinked\\WEB.Client.pdb",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/_bin\/WEB.Client.pdb.gz"
     },
@@ -341,7 +341,7 @@
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/blazor.webassembly.js.gz"
     },
     {
-      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\mfZV_F35045Inly3OUtqxtNMmJFRgt044Ug4rF6LhZ4=.hash",
+      "InputSource": "obj\\Debug\\netstandard2.1\\integrity\\NxDRPbrcUt5FDyREXhvh8Whm4YIjL6c6RfGTCFJioZ8=.hash",
       "Source": "C:\\WEBSITE\\WEB\\Client\\obj\\Debug\\netstandard2.1\\blazor\\blazor.boot.json",
       "Target": "obj\\Debug\\netstandard2.1\\compressed\\_framework\/blazor.boot.json.gz"
     }

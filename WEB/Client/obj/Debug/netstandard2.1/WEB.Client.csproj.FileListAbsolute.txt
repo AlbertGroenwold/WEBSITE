@@ -449,6 +449,6 @@ C:\WEBSITE\WEB\Client\obj\Debug\netstandard2.1\compressed\_framework\_bin\Micros
 C:\WEBSITE\WEB\Client\obj\Debug\netstandard2.1\compressed\_framework\_bin\Microsoft.Extensions.Identity.Core.dll.br
 C:\WEBSITE\WEB\Client\obj\Debug\netstandard2.1\compressed\_framework\_bin\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll.br
 C:\WEBSITE\WEB\Client\obj\Debug\netstandard2.1\compressed\_framework\_bin\Microsoft.AspNetCore.Cryptography.Internal.dll.br
-C:\WEBSITE\WEB\Client\obj\Debug\netstandard2.1\integrity\rHp0kudQ4GY2A7BkxnfKHRukib8eBm--pKXnf2NQvsQ=.hash
-C:\WEBSITE\WEB\Client\obj\Debug\netstandard2.1\integrity\_T2SGdwjPTXJiPIFNLnTfuy7c3yWHIIrfoCXyqF1Caw=.hash
-C:\WEBSITE\WEB\Client\obj\Debug\netstandard2.1\integrity\mfZV_F35045Inly3OUtqxtNMmJFRgt044Ug4rF6LhZ4=.hash
+C:\WEBSITE\WEB\Client\obj\Debug\netstandard2.1\integrity\52To0xMMcUAC0AAiwD6WIb4ixrsGgT_Ac2U6de_FxO8=.hash
+C:\WEBSITE\WEB\Client\obj\Debug\netstandard2.1\integrity\7Xa6uXDpr_JPemx3V5vKUt2VIE9EwZtsDFrPm_BiEQc=.hash
+C:\WEBSITE\WEB\Client\obj\Debug\netstandard2.1\integrity\NxDRPbrcUt5FDyREXhvh8Whm4YIjL6c6RfGTCFJioZ8=.hash
